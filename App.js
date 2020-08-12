@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   Animated,
 } from 'react-native'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import AddEntry from './components/AddEntry'
 import HomeView from './components/HomeView'
@@ -17,7 +17,7 @@ import NewDeckView from './components/NewDeckView'
 //import reducer from './reducers'
 //import { setLocalNotification } from './utils/helpers'
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createStackNavigator();
 function MyTabs() {
   return (
     <NavigationContainer>
@@ -38,9 +38,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      //<Provider store={createStore(reducer)}>
-            <MyTabs />
-      //</Provider>
+        <MyTabs />
     )
   }
 }

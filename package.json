@@ -8,8 +8,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/material-top-tabs": "^5.2.16",
     "@react-navigation/native": "^5.7.3",
+    "@react-navigation/stack": "^5.9.0",
     "expo": "~38.0.9",
     "expo-permissions": "~9.0.1",
     "expo-splash-screen": "^0.5.0",
@@ -23,7 +25,8 @@
     "react-native-screens": "~2.9.0",
     "react-native-tab-view": "^2.15.1",
     "react-native-unimodules": "~0.10.1",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-navigation": "^4.4.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
