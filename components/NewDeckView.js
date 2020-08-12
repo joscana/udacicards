@@ -5,10 +5,10 @@ import { Text, TextInput, View, Alert } from 'react-native'
 
 export default class NewDeckView extends Component {
     state = {
-        text: ''
+        input: ''
     }
-    handleChangeText = (e) => {
-        console.log('text has changed!')
+    handleChangeText = (input) => {
+        this.setState({input: input})
     }
 
     render() {
