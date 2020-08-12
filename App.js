@@ -1,14 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import React, { Component } from 'react'
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  TouchableHighlight,
+  Animated,
+} from 'react-native'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import AddEntry from './components/AddEntry'
+import HomeView from './components/HomeView'
+import NewDeckView from './components/NewDeckView'
+//import { createStore } from 'redux'
+//import { Provider } from 'react-redux'
+//import reducer from './reducers'
+//import { setLocalNotification } from './utils/helpers'
 
-export default function App() {
+const Tab = createMaterialTopTabNavigator();
+function MyTabs() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeView} />
+        <Tab.Screen name="New Deck" component={NewDeckView}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
+}
+
+export default class App extends Component {
+  handlePress = () => {
+    alert('Hello!')
+  }
+  componentDidMount() {
+    //setLocalNotification()
+  }
+  render() {
+    return (
+      //<Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+            <MyTabs />
+            <HomeView />
+        </View>
+      //</Provider>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
