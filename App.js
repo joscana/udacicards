@@ -17,14 +17,14 @@ import NewDeckView from './components/NewDeckView'
 //import reducer from './reducers'
 //import { setLocalNotification } from './utils/helpers'
 
-const Tab = createStackNavigator();
+const Stack = createStackNavigator();
 function MyTabs() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeView} />
-        <Tab.Screen name="New Deck" component={NewDeckView}/>
-      </Tab.Navigator>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeView} />
+        <Stack.Screen name="New Deck" component={NewDeckView}/>
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
