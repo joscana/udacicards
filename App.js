@@ -30,9 +30,6 @@ function MyTabs() {
 }
 
 export default class App extends Component {
-  handlePress = () => {
-    alert('Hello!')
-  }
   componentDidMount() {
     //setLocalNotification()
   }
