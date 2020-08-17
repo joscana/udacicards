@@ -28,7 +28,6 @@ export const getDeck = async (key) => {
     }
 }
   
-//getDeck()
 export const saveDeckTitle = async (title) => {
     const deck = {
         "title": title,
@@ -41,6 +40,8 @@ export const saveDeckTitle = async (title) => {
         console.log(e)
       }
 }
+
+
 //addCardToDeck()
 
 

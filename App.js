@@ -1,11 +1,10 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
-import AddEntry from './components/AddEntry'
 import HomeView from './components/HomeView'
 import NewDeckView from './components/NewDeckView'
+import Deck from './components/Deck'
 //import { createStore } from 'redux'
 //import { Provider } from 'react-redux'
 //import reducer from './reducers'
@@ -20,6 +19,7 @@ function MyTabs() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeView} />
         <Stack.Screen name="New Deck" component={NewDeckView}/>
+        <Stack.Screen name="Deck" component={Deck} />
       </Stack.Navigator>
     </NavigationContainer>
   )

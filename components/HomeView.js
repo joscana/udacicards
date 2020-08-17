@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native'
-import Deck from './Deck'
+import DeckPreview from './DeckPreview'
 import { getDecks } from '../utils/helpers'
 
 
@@ -24,9 +24,13 @@ export default class HomeView extends Component {
                 <Text>Decks</Text>
                 <View style={styles.deckList}>
                     {this.state.deckKeys.map((key) => (
-                        <Deck deckKey={key} key={key}/>
+                        <DeckPreview 
+                            deckKey={key} 
+                            key={key}
+                            navigation={this.props.navigation}/>
                     ))}
-                    <TouchableOpacity
+                </View>
+                <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => this.props.navigation.navigate('New Deck')}
                         style={styles.TouchableOpacityStyle}>
@@ -37,7 +41,6 @@ export default class HomeView extends Component {
                             style={styles.FloatingButtonStyle}
                         />
                     </TouchableOpacity>
-                </View>
             </View>
         )
     }
