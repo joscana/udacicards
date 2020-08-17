@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Image, Alert } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'
+import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native'
 import Deck from './Deck'
+import { getDecks } from '../utils/helpers'
 
 
 export default class HomeView extends Component {
+
+    state = {
+        deckKeys: []
+    }
+
+    componentDidMount() {
+        getDecks().then((keys) => {
+            this.setState({
+                deckKeys: keys,
+            })
+        })
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Text>Decks</Text>
                 <View style={styles.deckList}>
-                    <Deck />
-                    <Deck />
+                    {this.state.deckKeys.map((key) => (
+                        <Deck deckKey={key} key={key}/>
+                    ))}
                     <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => this.props.navigation.navigate('New Deck')}

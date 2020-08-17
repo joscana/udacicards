@@ -1,5 +1,6 @@
-import React, { Component, useState } from 'react'
-import { Text, TextInput, View, Image, Alert, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
+import { Text, TextInput, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { saveDeckTitle } from '../utils/helpers'
 
 
 
@@ -10,8 +11,8 @@ export default class NewDeckView extends Component {
     handleChangeText = (input) => {
         this.setState({input: input})
     }
-    saveDeckTitle = (input) => {
-        console.log(this.state.input)
+    saveTitle = (e) => {
+        saveDeckTitle(this.state.input)
     }
     
 
@@ -26,7 +27,7 @@ export default class NewDeckView extends Component {
                 />
                 <TouchableOpacity 
                     style={styles.button}
-                    onPress={this.saveDeckTitle}
+                    onPress={this.saveTitle}
                 >
                         <Text style={{ color: "white"}}>Save my title!</Text>
                 </TouchableOpacity>

@@ -1,12 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
-import React, { Component } from 'react'
-import { 
-  StyleSheet, 
-  Text, 
-  View,
-  TouchableHighlight,
-  Animated,
-} from 'react-native'
+import React from 'react'
+import { StyleSheet } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import AddEntry from './components/AddEntry'
@@ -16,6 +10,8 @@ import NewDeckView from './components/NewDeckView'
 //import { Provider } from 'react-redux'
 //import reducer from './reducers'
 //import { setLocalNotification } from './utils/helpers'
+
+
 
 const Stack = createStackNavigator();
 function MyTabs() {
@@ -29,16 +25,14 @@ function MyTabs() {
   )
 }
 
-export default class App extends Component {
-  componentDidMount() {
-    //setLocalNotification()
-  }
-  render() {
+
+
+export default function App() {
     return (
         <MyTabs />
     )
-  }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -48,3 +42,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+

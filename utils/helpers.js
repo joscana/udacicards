@@ -1,12 +1,46 @@
 import React from 'react'
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { FontAwesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { Notifications } from 'expo'
 import { Permissions } from 'expo-permissions'
+import AsyncStorage from '@react-native-community/async-storage'
 
-//getDecks()
+
+export const getDecks = async () => {
+    let keys = []
+    try {
+      keys = await AsyncStorage.getAllKeys()
+    } catch(e) {
+      // read key error
+      console.log(e)
+    }
+  
+    console.log(keys)
+    return keys
+  }
+
+export const getDeck = async (key) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key)
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch(e) {
+      // error reading value
+    }
+}
+  
 //getDeck()
-//saveDeckTitle()
+export const saveDeckTitle = async (title) => {
+    const deck = {
+        "title": title,
+        "questions": [],
+    }
+    try {
+        const jsonValue = JSON.stringify(deck)
+        await AsyncStorage.setItem(title, jsonValue)
+      } catch (e) {
+        console.log(e)
+      }
+}
 //addCardToDeck()
 
 
