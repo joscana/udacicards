@@ -10,7 +10,7 @@ export default class Deck extends Component {
             <Text style={styles.title}>{deckKey}</Text>
             <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => this.props.navigation.navigate('New Card')}
+                        onPress={() => this.props.navigation.navigate('New Card', { deckKey: deckKey})}
                         style={styles.TouchableOpacityStyle}>
                         <Image
                             source={{

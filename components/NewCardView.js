@@ -1,22 +1,47 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native'
+import { addCardToDeck } from '../utils/helpers'
 
 export default class NewCardView extends Component {
+    state = {
+        question: '',
+        answer: ''
+    }
+
+    handleChangeQuestionText = (input) => {
+        this.setState({question: input})
+    }
+
+    handleChangeAnswerText = (input) => {
+        this.setState({answer: input})
+    }
+
+    saveCardToDeck = (e) => {
+        const card = {
+            question: this.state.question,
+            answer: this.state.answer,
+        }
+        const { deckKey } = this.props.route.params;
+        addCardToDeck( deckKey, card)
+    }
 
     render() {
         return(
         <View style={styles.container}>
             <Text style={styles.title}>Deck Title</Text>
-            <TextInput style={styles.input}
-                    style={{height: 40}}
+            <TextInput 
+                    style={styles.input}
                     placeholder="Enter Question"
+                    onChangeText={this.handleChangeQuestionText}
                 />
-            <TextInput style={styles.input}
-                    style={{height: 40}}
+            <TextInput 
+                    style={styles.input}
                     placeholder="Enter Answer"
+                    onChangeText={this.handleChangeAnswerText}
                 />
             <TouchableOpacity 
-                style={styles.button} >
+                style={styles.button}
+                onPress={this.saveCardToDeck}>
                 <Text style={{ color: "white"}}>Save my card!</Text>
             </TouchableOpacity>
         </View>
@@ -38,7 +63,7 @@ const styles = StyleSheet.create({
     input: {
         alignSelf: "stretch",
         margin: 32,
-        height: 64,
+        height: 40,
         paddingHorizontal: 16,
         fontSize: 24,
         fontWeight: "300",
