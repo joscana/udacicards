@@ -1,8 +1,4 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { FontAwesome, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
-import { Notifications } from 'expo'
-import { Permissions } from 'expo-permissions'
 import AsyncStorage from '@react-native-community/async-storage'
 
 
@@ -42,7 +38,9 @@ export const saveDeckTitle = async (title) => {
 }
 
 
-//addCardToDeck()
+export const addCardToDeck = async (title, card) => {
+   //
+}
 
 
 

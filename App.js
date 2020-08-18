@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import HomeView from './components/HomeView'
 import NewDeckView from './components/NewDeckView'
 import Deck from './components/Deck'
+import NewCardView from './components/NewCardView'
 //import { createStore } from 'redux'
 //import { Provider } from 'react-redux'
 //import reducer from './reducers'
@@ -20,6 +21,7 @@ function MyTabs() {
         <Stack.Screen name="Home" component={HomeView} />
         <Stack.Screen name="New Deck" component={NewDeckView}/>
         <Stack.Screen name="Deck" component={Deck} />
+        <Stack.Screen name="New Card" component={NewCardView} />
       </Stack.Navigator>
     </NavigationContainer>
   )
