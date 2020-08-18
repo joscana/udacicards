@@ -9,10 +9,26 @@ export default class Quiz extends Component {
         questionsCorrect: 0,
     }
 
+    componentDidMount() {
+        const { deckKey } = this.props.route.params
+        getDeck(deckKey).then((deck) => {
+            this.setState({ deck: deck })
+        })
+    }
+
     render () {
+        
+        if (!this.state.deck) {
+            return (
+                <View>
+                    <Text>No Deck</Text>
+                </View>
+            )
+        }
         return (
             <View>
                 <Text>Welcome to Quiz!</Text>
+                <Text>{this.state.deck.questions}</Text>
             </View>
         )
     }
