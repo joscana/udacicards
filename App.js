@@ -6,6 +6,7 @@ import HomeView from './components/HomeView'
 import NewDeckView from './components/NewDeckView'
 import Deck from './components/Deck'
 import NewCardView from './components/NewCardView'
+import Quiz from './components/Quiz'
 //import { createStore } from 'redux'
 //import { Provider } from 'react-redux'
 //import reducer from './reducers'
@@ -22,6 +23,7 @@ function MyTabs() {
         <Stack.Screen name="New Deck" component={NewDeckView}/>
         <Stack.Screen name="Deck" component={Deck} />
         <Stack.Screen name="New Card" component={NewCardView} />
+        <Stack.Screen name="Quiz" component={Quiz} />
       </Stack.Navigator>
     </NavigationContainer>
   )

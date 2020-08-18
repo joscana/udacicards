@@ -1,25 +1,53 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
+import { getDeck } from '../utils/helpers';
+
 
 export default class Deck extends Component {
 
+    state = {
+        deck: null,
+    }
+
+    componentDidMount() {
+        const { deckKey } = this.props.route.params
+        getDeck(deckKey).then((deck) => {
+            this.setState({ deck: deck })
+        })
+    }
+
     render() {
-        const { deckKey } = this.props.route.params;
-        return(
-        <View style={styles.container}>
-            <Text style={styles.title}>{deckKey}</Text>
-            <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={() => this.props.navigation.navigate('New Card', { deckKey: deckKey})}
-                        style={styles.TouchableOpacityStyle}>
-                        <Image
-                            source={{
-                                uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png',
-                            }}
-                            style={styles.FloatingButtonStyle}
-                        />
-                    </TouchableOpacity>
-        </View>
+        const { deckKey } = this.props.route.params
+        
+        if (!this.state.deck) {
+            return (
+                <View>
+                    <Text>No Deck</Text>
+                </View>
+            )
+        }
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>{this.state.deck.title}</Text>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => this.props.navigation.navigate('New Card', { deckKey: deckKey })}
+                    style={styles.TouchableOpacityStyle}>
+                    <Image
+                        source={{
+                            uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png',
+                        }}
+                        style={styles.FloatingButtonStyle}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => this.props.navigation.navigate('Quiz', { deckKey: deckKey })}
+                    style={styles.button}>
+                    <Text style={{ color: "white" }}>Start Quiz</Text>
+                </TouchableOpacity>
+            </View>
         )
     }
 }
