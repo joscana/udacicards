@@ -56,9 +56,10 @@ export default class Quiz extends Component {
         
 
         const card = this.state.deck.questions[this.state.currentCardIndex]
-
+        const currentCard = this.state.currentCardIndex + 1
         return (
             <View style={styles.container}>
+                <Text style={styles.count}>{currentCard} / {this.state.deck.questions.length}</Text>
                 <Text style={styles.title}>Welcome to Quiz!</Text>
                 <Card 
                     question={card.question} 
@@ -125,5 +126,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 32,
         borderRadius: 6,
         fontSize: 16,
-    }
+    }, 
+    count: {
+        alignSelf: "flex-start"
+    },
 })
