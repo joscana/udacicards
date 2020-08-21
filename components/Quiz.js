@@ -18,12 +18,30 @@ export default class Quiz extends Component {
         })
     }
 
+    handleCorrectAnswer = (e) => {
+        const questionsCorrect = this.state.questionsCorrect + 1
+        const currentCardIndex = this.state.currentCardIndex + 1
+        this.setState({ questionsCorrect: questionsCorrect })
+        console.log(this.state.questionsCorrect, questionsCorrect)
+        this.setState({ currentCardIndex: currentCardIndex })
+        console.log(this.state.currentCardIndex, currentCardIndex)
+    }
+
     render() {
 
         if (!this.state.deck || this.state.deck.questions.length === 0) {
             return (
                 <View>
                     <Text>No Questions in Deck</Text>
+                </View>
+            )
+        }
+
+        if(this.state.currentCardIndex >= this.state.deck.questions.length) {
+            return(
+                <View>
+                    <Text>Quiz Complete</Text>
+                    <Text>Your Score: </Text>
                 </View>
             )
         }
@@ -38,7 +56,8 @@ export default class Quiz extends Component {
                     answer={card.answer}/>
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    style={styles.correctButton}>
+                    style={styles.correctButton}
+                    onPress={this.handleCorrectAnswer}>
                     <Text style={{ color: "white"}}>Correct</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
