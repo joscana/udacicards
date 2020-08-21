@@ -27,6 +27,12 @@ export default class Quiz extends Component {
         console.log(this.state.currentCardIndex, currentCardIndex)
     }
 
+    handleIncorrectAnswer = (e) => {
+        const currentCardIndex = this.state.currentCardIndex + 1
+        this.setState({ currentCardIndex: currentCardIndex })
+        console.log(this.state.currentCardIndex, currentCardIndex)
+    }
+
     render() {
 
         if (!this.state.deck || this.state.deck.questions.length === 0) {
@@ -38,13 +44,16 @@ export default class Quiz extends Component {
         }
 
         if(this.state.currentCardIndex >= this.state.deck.questions.length) {
+            const score = this.state.questionsCorrect / this.state.deck.questions.length * 100 + '%'
             return(
                 <View>
                     <Text>Quiz Complete</Text>
-                    <Text>Your Score: </Text>
+                    <Text>Your Score: {score}</Text>
                 </View>
             )
         }
+
+        
 
         const card = this.state.deck.questions[this.state.currentCardIndex]
 
@@ -62,7 +71,8 @@ export default class Quiz extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    style={styles.incorrectButton}>
+                    style={styles.incorrectButton}
+                    onPress={this.handleIncorrectAnswer}>
                     <Text style={{ color: "white"}}>Incorrect</Text>
                 </TouchableOpacity>
             </View>
