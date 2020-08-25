@@ -53,6 +53,14 @@ export const addCardToDeck = async (title, card) => {
    }
 }
 
+export const deleteDeck = async (title) => {
+  try{
+    await AsyncStorage.removeItem(title)
+}
+catch(e) {
+  //remove error
+}
+}
 
 
 // const NOTIFICATION_KEY = 'Udacicards: notifications'

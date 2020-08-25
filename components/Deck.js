@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
-import { getDeck } from '../utils/helpers';
+import { getDeck, deleteDeck } from '../utils/helpers';
 
 
 export default class Deck extends Component {
@@ -16,6 +16,12 @@ export default class Deck extends Component {
         })
     }
 
+    handleDeleteDeck = (e) => {
+        console.log('delete deck pressed')
+        const { deckKey } = this.props.route.params
+        deleteDeck(deckKey)
+    }
+
     render() {
         const { deckKey } = this.props.route.params
         
@@ -27,25 +33,50 @@ export default class Deck extends Component {
             )
         }
 
-        return (
-            <View style={styles.container}>
-                <Text style={styles.title}>{this.state.deck.title}</Text>
+        const cardsInDeck = this.state.deck.questions.length
+
+        if(cardsInDeck === 0) {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.title}>{this.state.deck.title}</Text>
+                <Text> 0 cards</Text>
                 <TouchableOpacity
                     activeOpacity={0.7}
                     onPress={() => this.props.navigation.navigate('New Card', { deckKey: deckKey })}
-                    style={styles.TouchableOpacityStyle}>
-                    <Image
-                        source={{
-                            uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png',
-                        }}
-                        style={styles.FloatingButtonStyle}
-                    />
+                    style={styles.button}>
+                    <Text style={{ color: "white" }}>Add Card</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={this.handleDeleteDeck}
+                    style={styles.button}>
+                    <Text style={{ color: "white" }}>Delete Deck</Text>
+                </TouchableOpacity>
+                </View>
+            )
+        }
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>{this.state.deck.title}</Text>
+                <Text>{cardsInDeck === 1 ? `${cardsInDeck} card` : `${cardsInDeck} cards`} </Text>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => this.props.navigation.navigate('New Card', { deckKey: deckKey })}
+                    style={styles.button}>
+                    <Text style={{ color: "white" }}>Add Card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.7}
                     onPress={() => this.props.navigation.navigate('Quiz', { deckKey: deckKey })}
                     style={styles.button}>
                     <Text style={{ color: "white" }}>Start Quiz</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={this.handleDeleteDeck}
+                    style={styles.button}>
+                    <Text style={{ color: "white" }}>Delete Deck</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -73,19 +104,5 @@ const styles = StyleSheet.create({
         marginTop: 32,
         marginHorizontal: 32,
         borderRadius: 6,
-    },
-    TouchableOpacityStyle: {
-        position: 'absolute',
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        right: 30,
-        bottom: 30,
-    },
-    FloatingButtonStyle: {
-        resizeMode: 'contain',
-        width: 50,
-        height: 50,
     },
 })
