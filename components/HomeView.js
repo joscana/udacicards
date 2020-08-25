@@ -21,7 +21,7 @@ export default class HomeView extends Component {
     render() {
         return (
             <ScrollView>
-                <Text>Decks</Text>
+                <Text style={styles.title}> Your Decks</Text>
                 <View style={styles.deckList}>
                     {this.state.deckKeys.map((key) => (
                         <DeckPreview 
@@ -33,13 +33,8 @@ export default class HomeView extends Component {
                 <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => this.props.navigation.navigate('New Deck')}
-                        style={styles.TouchableOpacityStyle}>
-                        <Image
-                            source={{
-                                uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png',
-                            }}
-                            style={styles.FloatingButtonStyle}
-                        />
+                        style={styles.button}>
+                       <Text style={{ color: "white" }}>Add a New Deck</Text>
                     </TouchableOpacity>
             </ScrollView>
         )
@@ -54,24 +49,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     deckList: {
-        borderWidth: 4,
-        borderColor: "#20232a",
-        borderRadius: 6,
         padding: 20,
     },
-    TouchableOpacityStyle: {
-        position: 'absolute',
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        right: 30,
-        bottom: 30,
+    button: {
+        backgroundColor: "#575DD9",
+        alignItems: "center",
+        justifyContent: "center",
+        alignSelf: "stretch",
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        marginTop: 32,
+        marginHorizontal: 32,
+        borderRadius: 6,
     },
-    FloatingButtonStyle: {
-        resizeMode: 'contain',
-        width: 50,
-        height: 50,
-        //backgroundColor:'black'
+    title: {
+        fontSize: 18,
+        fontWeight: "300"
     },
 });

@@ -41,9 +41,14 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderColor: "#20232a",
         borderRadius: 6,
-        marginVertical: 10,
+        marginVertical: 20,
         marginHorizontal: 20,
         padding: 20,
+        height: 150,
+        width: 250,
+        alignSelf: "center",
+        justifyContent: "center",
+        alignItems: "center",
     },
   });
   
