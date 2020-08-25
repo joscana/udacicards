@@ -26,9 +26,10 @@ export default class NewCardView extends Component {
     }
 
     render() {
+        const { deckKey } = this.props.route.params;
         return(
         <View style={styles.container}>
-            <Text style={styles.title}>Deck Title</Text>
+            <Text style={styles.title}>{deckKey}</Text>
             <TextInput 
                     style={styles.input}
                     placeholder="Enter Question"
