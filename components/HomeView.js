@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import DeckPreview from './DeckPreview'
 import { getDecks } from '../utils/helpers'
 
@@ -20,7 +20,7 @@ export default class HomeView extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView>
                 <Text>Decks</Text>
                 <View style={styles.deckList}>
                     {this.state.deckKeys.map((key) => (
@@ -41,7 +41,7 @@ export default class HomeView extends Component {
                             style={styles.FloatingButtonStyle}
                         />
                     </TouchableOpacity>
-            </View>
+            </ScrollView>
         )
     }
 }
