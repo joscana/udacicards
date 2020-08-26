@@ -33,6 +33,10 @@ export default class Quiz extends Component {
         console.log(this.state.currentCardIndex, currentCardIndex)
     }
 
+    handleRestart = (e) => {
+        this.setState({ currentCardIndex: 0, questionsCorrect: 0})
+    }
+
     render() {
 
         if (!this.state.deck || this.state.deck.questions.length === 0) {
@@ -51,7 +55,8 @@ export default class Quiz extends Component {
                     <Text style={styles.title}>Your Score: {score}</Text>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        style={styles.button}>
+                        style={styles.button}
+                        onPress={this.handleRestart}>
                         <Text style={{ color: "white" }}>Start Quiz Over</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
