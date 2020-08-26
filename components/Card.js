@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 20,
         padding: 60,
+        height: 250,
+        width: 350,
     },
     text: {
         fontSize: 24,

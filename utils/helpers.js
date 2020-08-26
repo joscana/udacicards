@@ -66,6 +66,12 @@ export const addCardToDeck = async (title, card) => {
 export const deleteDeck = async (title) => {
   try {
     await AsyncStorage.removeItem(title)
+    getDecks().then(async (decks) => {
+      const newDecks = decks.filter(function(value, index, arr){ return value != title;});
+      const jsonValue = JSON.stringify(newDecks)
+      await AsyncStorage.setItem(DECK_KEYS, jsonValue)
+    }
+    )
   }
   catch (e) {
     //remove error

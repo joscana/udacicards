@@ -33,8 +33,8 @@ export default class Deck extends Component {
         
         if (!this.state.deck) {
             return (
-                <View>
-                    <Text>No Deck</Text>
+                <View style={styles.container}>
+                    <Text style={styles.title}>Sorry, this deck does not exist or it has been deleted</Text>
                 </View>
             )
         }
