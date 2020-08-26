@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { getDeck, deleteDeck } from '../utils/helpers';
+import { getDeck, deleteDeck, clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 
 export default class Deck extends Component {
@@ -17,9 +17,15 @@ export default class Deck extends Component {
     }
 
     handleDeleteDeck = (e) => {
-        console.log('delete deck pressed')
         const { deckKey } = this.props.route.params
         deleteDeck(deckKey)
+    }
+
+    handleStartQuiz = (e) => {
+        const { deckKey } = this.props.route.params
+        clearLocalNotification()
+        .then(setLocalNotification)
+        this.props.navigation.navigate('Quiz', { deckKey: deckKey })
     }
 
     render() {
@@ -68,7 +74,7 @@ export default class Deck extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => this.props.navigation.navigate('Quiz', { deckKey: deckKey })}
+                    onPress={this.handleStartQuiz}
                     style={styles.button}>
                     <Text style={{ color: "white" }}>Start Quiz</Text>
                 </TouchableOpacity>

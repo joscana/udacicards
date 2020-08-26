@@ -2,10 +2,15 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions'
 
+const DECK_KEYS = "deckKeys"
+
 export const getDecks = async () => {
   let keys = []
   try {
-    keys = await AsyncStorage.getAllKeys()
+    jsonKeys = await AsyncStorage.getItem(DECK_KEYS)
+    if (jsonKeys != null) {
+      keys = JSON.parse(jsonKeys)
+    }
   } catch (e) {
     // read key error
     console.log(e)
@@ -32,6 +37,12 @@ export const saveDeckTitle = async (title) => {
   try {
     const jsonValue = JSON.stringify(deck)
     await AsyncStorage.setItem(title, jsonValue)
+    getDecks().then(async (decks) => {
+      decks.push(title)
+      const jsonValue = JSON.stringify(decks)
+      await AsyncStorage.setItem(DECK_KEYS, jsonValue)
+    }
+    )
   } catch (e) {
     console.log(e)
   }
@@ -44,7 +55,6 @@ export const addCardToDeck = async (title, card) => {
       deck.questions.push(card)
       const jsonValue = JSON.stringify(deck)
       await AsyncStorage.setItem(title, jsonValue)
-      console.log(deck)
     }
     )
   }
