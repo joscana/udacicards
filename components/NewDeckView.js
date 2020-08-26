@@ -12,7 +12,12 @@ export default class NewDeckView extends Component {
         this.setState({input: input})
     }
     saveTitle = (e) => {
-        saveDeckTitle(this.state.input)
+        if(this.state.input !== '') {
+            saveDeckTitle(this.state.input)
+        }
+        else {
+            alert("Oops! You forgot to enter a title!")
+        }
     }
     
 

@@ -37,8 +37,8 @@ export default class Quiz extends Component {
 
         if (!this.state.deck || this.state.deck.questions.length === 0) {
             return (
-                <View>
-                    <Text>No Questions in Deck</Text>
+                <View style={styles.container}>
+                    <Text style={styles.title}> Sorry, you can't take a Quiz because there are no questions in this deck</Text>
                 </View>
             )
         }
@@ -46,9 +46,19 @@ export default class Quiz extends Component {
         if(this.state.currentCardIndex >= this.state.deck.questions.length) {
             const score = this.state.questionsCorrect / this.state.deck.questions.length * 100 + '%'
             return(
-                <View>
-                    <Text>Quiz Complete</Text>
-                    <Text>Your Score: {score}</Text>
+                <View style={styles.container}>
+                    <Text style={styles.title}>Quiz Complete</Text>
+                    <Text style={styles.title}>Your Score: {score}</Text>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        style={styles.button}>
+                        <Text style={{ color: "white" }}>Start Quiz Over</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        style={styles.button}>
+                        <Text style={{ color: "white" }}>Back to Deck</Text>
+                    </TouchableOpacity>
                 </View>
             )
         }

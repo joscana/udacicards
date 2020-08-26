@@ -22,7 +22,12 @@ export default class NewCardView extends Component {
             answer: this.state.answer,
         }
         const { deckKey } = this.props.route.params;
-        addCardToDeck( deckKey, card)
+        if(this.state.question !== '' && this.state.answer !== '') {
+            addCardToDeck( deckKey, card)
+        }
+        else {
+            alert("Oops! You must enter a question and answer to save a card.")
+        }
     }
 
     render() {
