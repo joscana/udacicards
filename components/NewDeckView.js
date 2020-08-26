@@ -12,8 +12,10 @@ export default class NewDeckView extends Component {
         this.setState({input: input})
     }
     saveTitle = (e) => {
+        //const { deckKey } = this.props.route.params;
         if(this.state.input !== '') {
             saveDeckTitle(this.state.input)
+            //this.props.navigation.navigate('Deck', { deckKey: deckKey })
         }
         else {
             alert("Oops! You forgot to enter a title!")
