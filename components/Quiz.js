@@ -61,7 +61,8 @@ export default class Quiz extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        style={styles.button}>
+                        style={styles.button}
+                        onPress={() => this.props.navigation.goBack()}>
                         <Text style={{ color: "white" }}>Back to Deck</Text>
                     </TouchableOpacity>
                 </View>
