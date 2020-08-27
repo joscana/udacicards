@@ -13,8 +13,13 @@ export default class HomeView extends Component {
 
     componentDidMount() {
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            this.setState ({
+                deckKeys: []
+            })
             this.loadDecks()
         });
+
+        this.loadDecks()
     }
     
     componentWillUnmount() {
