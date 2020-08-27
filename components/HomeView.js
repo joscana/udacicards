@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import DeckPreview from './DeckPreview'
 import { getDecks } from '../utils/helpers'
+import { onChange } from 'react-native-reanimated'
 
 
 export default class HomeView extends Component {
 
     state = {
-        deckKeys: []
+        deckKeys: [],
     }
 
     componentDidMount() {
@@ -29,7 +30,7 @@ export default class HomeView extends Component {
     }
 
     navigateToAddDeck = () => {
-        this.props.navigation.navigate('New Deck', { onGoBack: this.goToDeck })
+        this.props.navigation.navigate('New Deck')
     }
 
     render() {
@@ -41,7 +42,8 @@ export default class HomeView extends Component {
                         <DeckPreview 
                             deckKey={key} 
                             key={key}
-                            navigation={this.props.navigation}/>
+                            navigation={this.props.navigation}
+                         />
                     ))}
                 </View>
                 <TouchableOpacity

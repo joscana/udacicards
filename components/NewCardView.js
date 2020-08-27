@@ -23,7 +23,9 @@ export default class NewCardView extends Component {
         }
         const { deckKey } = this.props.route.params;
         if(this.state.question !== '' && this.state.answer !== '') {
-            addCardToDeck( deckKey, card)
+            addCardToDeck( deckKey, card).then(() => {
+                this.props.navigation.navigate('Deck', { deckKey: deckKey })
+            })
         }
         else {
             alert("Oops! You must enter a question and answer to save a card.")

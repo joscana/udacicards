@@ -51,10 +51,10 @@ export const saveDeckTitle = async (title) => {
 
 export const addCardToDeck = async (title, card) => {
   try {
-    getDeck(title).then(async (deck) => {
+    return getDeck(title).then(async (deck) => {
       deck.questions.push(card)
       const jsonValue = JSON.stringify(deck)
-      await AsyncStorage.setItem(title, jsonValue)
+      return AsyncStorage.setItem(title, jsonValue)
     }
     )
   }
@@ -65,11 +65,12 @@ export const addCardToDeck = async (title, card) => {
 
 export const deleteDeck = async (title) => {
   try {
-    await AsyncStorage.removeItem(title)
-    getDecks().then(async (decks) => {
-      const newDecks = decks.filter(function(value, index, arr){ return value != title;});
+    return AsyncStorage.removeItem(title).then(() => {
+      return getDecks()
+    }).then((decks) => {
+      const newDecks = decks.filter(function (value, index, arr) { return value != title; });
       const jsonValue = JSON.stringify(newDecks)
-      await AsyncStorage.setItem(DECK_KEYS, jsonValue)
+      return AsyncStorage.setItem(DECK_KEYS, jsonValue)
     }
     )
   }
@@ -87,46 +88,46 @@ export function clearLocalNotification() {
 }
 
 
-export function createNotification () {
-    return {
-        title: 'Study!',
-        body: "Don't forget to quiz yourself today!",
-        android: {
-            sound: true,
-            priority: 'high',
-            sticky: false,
-            vibrate: true,
-        }
+export function createNotification() {
+  return {
+    title: 'Study!',
+    body: "Don't forget to quiz yourself today!",
+    android: {
+      sound: true,
+      priority: 'high',
+      sticky: false,
+      vibrate: true,
     }
+  }
 }
 
 
-export function setLocalNotification () {
-    AsyncStorage.getItem(NOTIFICATION_KEY)
+export function setLocalNotification() {
+  AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)
     .then((data) => {
-        if(data === null) {
-            Permissions.askAsync(Permissions.NOTIFICATIONS)
-            .then(({ status }) => {
-                if(status === 'granted') {
-                    Notifications.cancelAllScheduledNotificationsAsync()
+      if (data === null) {
+        Permissions.askAsync(Permissions.NOTIFICATIONS)
+          .then(({ status }) => {
+            if (status === 'granted') {
+              Notifications.cancelAllScheduledNotificationsAsync()
 
-                    let tomorrow = new Date()
-                    tomorrow.setDate(tomorrow.getDate() + 1)
-                    tomorrow.setHours(20)
-                    tomorrow.setMinutes(0)
+              let tomorrow = new Date()
+              tomorrow.setDate(tomorrow.getDate() + 1)
+              tomorrow.setHours(20)
+              tomorrow.setMinutes(0)
 
-                    Notifications.scheduleLocalNotificationAsync(
-                        createNotification(),
-                        {
-                            time: tomorrow,
-                            repeat: 'day',
-                        }
-                    )
-                    AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
-
+              Notifications.scheduleLocalNotificationAsync(
+                createNotification(),
+                {
+                  time: tomorrow,
+                  repeat: 'day',
                 }
-            })
-        }
+              )
+              AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
+
+            }
+          })
+      }
     })
 }

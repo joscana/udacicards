@@ -10,6 +10,16 @@ export default class Deck extends Component {
     }
 
     componentDidMount() {
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            this.loadDeck()
+        });
+    }
+    
+    componentWillUnmount() {
+        this._unsubscribe()
+    }
+
+    loadDeck = () => {
         const { deckKey } = this.props.route.params
         getDeck(deckKey).then((deck) => {
             this.setState({ deck: deck })
@@ -18,19 +28,22 @@ export default class Deck extends Component {
 
     handleDeleteDeck = (e) => {
         const { deckKey } = this.props.route.params
-        deleteDeck(deckKey)
+        deleteDeck(deckKey).then(() => {
+            const now = new Date()
+            this.props.navigation.navigate('Home')
+        })
     }
 
     handleStartQuiz = (e) => {
         const { deckKey } = this.props.route.params
         clearLocalNotification()
-        .then(setLocalNotification)
+            .then(setLocalNotification)
         this.props.navigation.navigate('Quiz', { deckKey: deckKey })
     }
 
     render() {
         const { deckKey } = this.props.route.params
-        
+
         if (!this.state.deck) {
             return (
                 <View style={styles.container}>
@@ -41,23 +54,23 @@ export default class Deck extends Component {
 
         const cardsInDeck = this.state.deck.questions.length
 
-        if(cardsInDeck === 0) {
+        if (cardsInDeck === 0) {
             return (
                 <View style={styles.container}>
                     <Text style={styles.title}>{this.state.deck.title}</Text>
-                <Text> 0 cards</Text>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => this.props.navigation.navigate('New Card', { deckKey: deckKey })}
-                    style={styles.button}>
-                    <Text style={{ color: "white" }}>Add Card</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={this.handleDeleteDeck}
-                    style={styles.button}>
-                    <Text style={{ color: "white" }}>Delete Deck</Text>
-                </TouchableOpacity>
+                    <Text> 0 cards</Text>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => this.props.navigation.navigate('New Card', { deckKey: deckKey })}
+                        style={styles.button}>
+                        <Text style={{ color: "white" }}>Add Card</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={this.handleDeleteDeck}
+                        style={styles.button}>
+                        <Text style={{ color: "white" }}>Delete Deck</Text>
+                    </TouchableOpacity>
                 </View>
             )
         }

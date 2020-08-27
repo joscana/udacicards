@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, TextInput, View, StyleSheet, TouchableOpacity } from 'react-native'
-import { saveDeckTitle } from '../utils/helpers'
+import { saveDeckTitle, getDecks } from '../utils/helpers'
+import { onChange } from 'react-native-reanimated'
 
 
 
@@ -8,36 +9,44 @@ export default class NewDeckView extends Component {
     state = {
         input: ''
     }
+
     handleChangeText = (input) => {
-        this.setState({input: input})
+        this.setState({ input: input })
     }
+
     saveTitle = (e) => {
-        if(this.state.input !== '') {
-            saveDeckTitle(this.state.input).then(() => {
-                const { onGoBack } = this.props.route.params
-                this.props.navigation.replace('Deck', { deckKey: this.state.input })
+
+        if (this.state.input === '') {
+            alert("Oops! You forgot to enter a title!")
+        } else {
+            getDecks().then((keys) => {
+
+                if (keys.includes(this.state.input)) {
+                    alert("Deck title needs to be unique")
+                } else {
+                    saveDeckTitle(this.state.input).then(() => {
+                        this.props.navigation.replace('Deck', { deckKey: this.state.input })
+                    })
+                }
             })
         }
-        else {
-            alert("Oops! You forgot to enter a title!")
-        }
     }
-    
+
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
                 <Text style={styles.title}>What is the title of your new deck?</Text>
                 <TextInput style={styles.input}
-                    style={{height: 40}}
+                    style={{ height: 40 }}
                     placeholder="Enter Deck Title"
                     onChangeText={this.handleChangeText}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.button}
                     onPress={this.saveTitle}
                 >
-                        <Text style={{ color: "white"}}>Save my title!</Text>
+                    <Text style={{ color: "white" }}>Save my title!</Text>
                 </TouchableOpacity>
             </View>
         )

@@ -16,6 +16,10 @@ export default class DeckPreview extends Component {
     }
 
     componentDidMount() {
+        this.loadDeck()
+    }
+
+    loadDeck = () => {
         getDeck(this.props.deckKey).then((deck) => {
             this.setState({
                 title: deck.title,
@@ -26,32 +30,39 @@ export default class DeckPreview extends Component {
 
     navigateToDeck = () => {
         const { opacity } = this.state
-        Animated.timing(opacity, { 
-            toValue: 0, 
+        Animated.timing(opacity, {
+            toValue: 0,
             duration: 1000,
-            useNativeDriver: true, 
-        })
-        .start(() => {
-            this.props.navigation.navigate('Deck', { 
-                deckKey: this.props.deckKey,
+            useNativeDriver: true,
+        }).start(() => {
+
+            Animated.timing(opacity, {
+                toValue: 1,
+                duration: 1000,
+                useNativeDriver: true,
+            }).start()
+
+            this.props.navigation.navigate('Deck', {
+                deckKey: this.props.deckKey            
             })
+
         })
     }
 
 
-    render () {
+    render() {
         const { opacity } = this.state
 
         return (
+            <AnimatedTouchable onPress={this.navigateToDeck}>
                 <Animated.View
                     style={[styles.deckPreview, { opacity }]}>
-                    <AnimatedTouchable onPress={this.navigateToDeck}>
-                        <Text>{this.state.title}</Text>
-                        <Text>{this.state.size} cards</Text>
-                    </AnimatedTouchable>
+                    <Text>{this.state.title}</Text>
+                    <Text>{this.state.size} cards</Text>
                 </Animated.View>
-        
-            
+            </AnimatedTouchable>
+
+
         )
     }
 }
@@ -70,5 +81,4 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-  });
-  
+});
