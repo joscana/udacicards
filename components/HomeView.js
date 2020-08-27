@@ -11,11 +11,25 @@ export default class HomeView extends Component {
     }
 
     componentDidMount() {
+        this._unsubscribe = this.props.navigation.addListener('focus', () => {
+            this.loadDecks()
+        });
+    }
+    
+    componentWillUnmount() {
+        this._unsubscribe()
+    }
+
+    loadDecks = () => {
         getDecks().then((keys) => {
             this.setState({
                 deckKeys: keys,
             })
         })
+    }
+
+    navigateToAddDeck = () => {
+        this.props.navigation.navigate('New Deck', { onGoBack: this.goToDeck })
     }
 
     render() {
@@ -32,7 +46,7 @@ export default class HomeView extends Component {
                 </View>
                 <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => this.props.navigation.navigate('New Deck')}
+                        onPress={ this.navigateToAddDeck }
                         style={styles.button}>
                        <Text style={{ color: "white" }}>Add a New Deck</Text>
                     </TouchableOpacity>
