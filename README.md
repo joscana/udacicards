@@ -5,5 +5,10 @@ This project was built with React Native to create a mobile flashcard app for An
 ## Installation
 
 * Git clone or download project from GitHub
-* From the root directory of the project, run "npm install" to install dependencies
-* Run "npm start" to start the application
+* From the root directory of the project, run "yarn install" to install dependencies
+* To run with expo, run "expo start" and use the expo app to load the app using the QR code
+
+### Notes
+
+* This app was tested on android using expo
+

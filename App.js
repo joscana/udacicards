@@ -16,7 +16,7 @@ function MyTabs() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeView} />
-        <Stack.Screen name="New Deck" component={NewDeckView}/>
+        <Stack.Screen name="New Deck" component={NewDeckView} />
         <Stack.Screen name="Deck" component={Deck} />
         <Stack.Screen name="New Card" component={NewCardView} />
         <Stack.Screen name="Quiz" component={Quiz} />
@@ -31,9 +31,7 @@ export default function App() {
   useEffect(() => {
     setLocalNotification()
   }, [])
-    return (
-        <MyTabs />
-    )
+  return (
+    <MyTabs />
+  )
 }
-
-

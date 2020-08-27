@@ -14,7 +14,7 @@ export default class Deck extends Component {
             this.loadDeck()
         });
     }
-    
+
     componentWillUnmount() {
         this._unsubscribe()
     }

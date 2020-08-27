@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, Image, ScrollView } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native'
 import DeckPreview from './DeckPreview'
 import { getDecks } from '../utils/helpers'
-import { onChange } from 'react-native-reanimated'
 
 
 export default class HomeView extends Component {
@@ -13,7 +12,7 @@ export default class HomeView extends Component {
 
     componentDidMount() {
         this._unsubscribe = this.props.navigation.addListener('focus', () => {
-            this.setState ({
+            this.setState({
                 deckKeys: []
             })
             this.loadDecks()
@@ -21,7 +20,7 @@ export default class HomeView extends Component {
 
         this.loadDecks()
     }
-    
+
     componentWillUnmount() {
         this._unsubscribe()
     }
@@ -44,19 +43,19 @@ export default class HomeView extends Component {
                 <Text style={styles.title}> Your Decks</Text>
                 <View style={styles.deckList}>
                     {this.state.deckKeys.map((key) => (
-                        <DeckPreview 
-                            deckKey={key} 
+                        <DeckPreview
+                            deckKey={key}
                             key={key}
                             navigation={this.props.navigation}
-                         />
+                        />
                     ))}
                 </View>
                 <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={ this.navigateToAddDeck }
-                        style={styles.button}>
-                       <Text style={{ color: "white" }}>Add a New Deck</Text>
-                    </TouchableOpacity>
+                    activeOpacity={0.7}
+                    onPress={this.navigateToAddDeck}
+                    style={styles.button}>
+                    <Text style={{ color: "white" }}>Add a New Deck</Text>
+                </TouchableOpacity>
             </ScrollView>
         )
     }
@@ -64,11 +63,6 @@ export default class HomeView extends Component {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     deckList: {
         padding: 20,
     },

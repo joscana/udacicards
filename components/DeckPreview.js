@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Animated, Text, View, StyleSheet } from 'react-native'
+import { Animated, Text, StyleSheet } from 'react-native'
 import { getDeck } from '../utils/helpers'
 import { TouchableOpacity } from 'react-native'
-import { Value } from 'react-native-reanimated'
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
@@ -43,7 +42,7 @@ export default class DeckPreview extends Component {
             }).start()
 
             this.props.navigation.navigate('Deck', {
-                deckKey: this.props.deckKey            
+                deckKey: this.props.deckKey
             })
 
         })

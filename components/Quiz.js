@@ -22,19 +22,16 @@ export default class Quiz extends Component {
         const questionsCorrect = this.state.questionsCorrect + 1
         const currentCardIndex = this.state.currentCardIndex + 1
         this.setState({ questionsCorrect: questionsCorrect })
-        console.log(this.state.questionsCorrect, questionsCorrect)
         this.setState({ currentCardIndex: currentCardIndex })
-        console.log(this.state.currentCardIndex, currentCardIndex)
     }
 
     handleIncorrectAnswer = (e) => {
         const currentCardIndex = this.state.currentCardIndex + 1
         this.setState({ currentCardIndex: currentCardIndex })
-        console.log(this.state.currentCardIndex, currentCardIndex)
     }
 
     handleRestart = (e) => {
-        this.setState({ currentCardIndex: 0, questionsCorrect: 0})
+        this.setState({ currentCardIndex: 0, questionsCorrect: 0 })
     }
 
     render() {
@@ -47,9 +44,9 @@ export default class Quiz extends Component {
             )
         }
 
-        if(this.state.currentCardIndex >= this.state.deck.questions.length) {
+        if (this.state.currentCardIndex >= this.state.deck.questions.length) {
             const score = this.state.questionsCorrect / this.state.deck.questions.length * 100 + '%'
-            return(
+            return (
                 <View style={styles.container}>
                     <Text style={styles.title}>Quiz Complete</Text>
                     <Text style={styles.title}>Your Score: {score}</Text>
@@ -69,7 +66,7 @@ export default class Quiz extends Component {
             )
         }
 
-        
+
 
         const card = this.state.deck.questions[this.state.currentCardIndex]
         const currentCard = this.state.currentCardIndex + 1
@@ -77,20 +74,20 @@ export default class Quiz extends Component {
             <View style={styles.container}>
                 <Text style={styles.count}>{currentCard} / {this.state.deck.questions.length}</Text>
                 <Text style={styles.title}>Welcome to Quiz!</Text>
-                <Card 
-                    question={card.question} 
-                    answer={card.answer}/>
+                <Card
+                    question={card.question}
+                    answer={card.answer} />
                 <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.correctButton}
                     onPress={this.handleCorrectAnswer}>
-                    <Text style={{ color: "white"}}>Correct</Text>
+                    <Text style={{ color: "white" }}>Correct</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.incorrectButton}
                     onPress={this.handleIncorrectAnswer}>
-                    <Text style={{ color: "white"}}>Incorrect</Text>
+                    <Text style={{ color: "white" }}>Incorrect</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -142,7 +139,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 32,
         borderRadius: 6,
         fontSize: 16,
-    }, 
+    },
     count: {
         alignSelf: "flex-start"
     },

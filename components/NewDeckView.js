@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Text, TextInput, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { saveDeckTitle, getDecks } from '../utils/helpers'
-import { onChange } from 'react-native-reanimated'
 
 
 

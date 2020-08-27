@@ -5,16 +5,17 @@ export default class Card extends Component {
     state = {
         showAnswer: false
     }
+
     render() {
-        if(!this.state.showAnswer) {
+        if (!this.state.showAnswer) {
             return (
                 <View style={styles.card}>
                     <Text style={styles.text}>{this.props.question}</Text>
                     <TouchableOpacity
                         activeOpacity={0.7}
-                        onPress={() => this.setState({ showAnswer: true }) }
+                        onPress={() => this.setState({ showAnswer: true })}
                         style={styles.button}>
-                    <Text style={{ color: "white" }}>Show Answer</Text>
+                        <Text style={{ color: "white" }}>Show Answer</Text>
                     </TouchableOpacity>
                 </View>
             )
@@ -23,10 +24,10 @@ export default class Card extends Component {
             <View style={styles.card}>
                 <Text style={styles.text}>{this.props.answer}</Text>
                 <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={() => this.setState({ showAnswer: false }) }
-                        style={styles.button}>
-                        <Text style={{ color: "white" }}>Show Question</Text>
+                    activeOpacity={0.7}
+                    onPress={() => this.setState({ showAnswer: false })}
+                    style={styles.button}>
+                    <Text style={{ color: "white" }}>Show Question</Text>
                 </TouchableOpacity>
             </View>
         )
